@@ -3,7 +3,7 @@ import jsonServer from "../api/jsonServer";
 
 const blogReducer = (state, action) => {
   switch (action.type) {
-    case "add_blogpost":
+    /* case "add_blogpost":
       return [
         ...state,
         {
@@ -11,7 +11,7 @@ const blogReducer = (state, action) => {
           title: action.payload.title,
           content: action.payload.content,
         },
-      ];
+      ]; */
     case "delete_blogpost":
       return state.filter((blogPost) => blogPost.id !== action.payload);
     case "edit_blogpost":
@@ -55,8 +55,13 @@ const addBlogPost = (dispatch) => {
 };
 
 const deleteBlogPost = (dispatch) => {
-  return (id) => {
-    dispatch({ type: "delete_blogpost", payload: id });
+  return async (id) => {
+    try {
+      await jsonServer.delete(`/blogposts/${id}`);
+      dispatch({ type: "delete_blogpost", payload: id });
+    } catch {
+      (e) => console.log(e);
+    }
   };
 };
 
