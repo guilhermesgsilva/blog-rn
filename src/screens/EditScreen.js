@@ -6,10 +6,6 @@ import BlogPostForm from "../components/BlogPostForm";
 import { Context as BlogContext } from "../context/BlogContext";
 
 const EditScreen = ({ navigation }) => {
-  console.log(
-    "🚀 ~ file: EditScreen.js:9 ~ EditScreen ~ navigation:",
-    navigation
-  );
   const { id } = navigation.state.params;
 
   const { state, editBlogPost } = useContext(BlogContext);
